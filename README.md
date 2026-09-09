@@ -11,6 +11,11 @@ sensibilitate, robustețe, reproducibilitate).
 Punctul de plecare e proiectul Mariei: https://github.com/mariatimbus/NYC_RealEstate (SVD-ul custom e
 în `src/custom_svd.py` acolo). Datele: https://www.kaggle.com/datasets/new-york-city/nyc-property-sales
 
+## Planul tău, pas cu pas
+
+- [Maria](docs/plan-maria.md)
+- [David](docs/plan-david.md)
+
 ## Setup (5 minute)
 
 ```bash
