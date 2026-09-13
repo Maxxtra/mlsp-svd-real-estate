@@ -5,3 +5,4 @@ __pycache__/
 data/*.csv
 data/*.npy
 docs/*.html
+data/meta.json
