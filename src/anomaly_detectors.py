@@ -7,12 +7,14 @@ Scrie results/anomalies_<metoda>.csv: row, score, flagged
 import argparse, os, csv, numpy as np
 from sklearn.cluster import KMeans
 from sklearn.ensemble import IsolationForest
+from custom_svd import SVD
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 
 def score_svd(A, k):
-    U, s, Vt = np.linalg.svd(A, full_matrices=False)       # de luni: inlocuieste cu SVD-ul Mariei
-    Ak = (U[:, :k] * s[:k]) @ Vt[:k]
+    U, S, V = SVD(A)                                        # SVD-ul Mariei: S e matrice diagonala, V nu e transpus
+    s = np.diag(S)
+    Ak = (U[:, :k] * s[:k]) @ V[:, :k].T
     return np.sum((A - Ak)**2, axis=1)
 
 def score_kmeans(A, k=4, seed=42):
