@@ -1,5 +1,5 @@
 {
-  "columns": [
+  "full_columns": [
     "TOTAL UNITS",
     "RESIDENTIAL UNITS",
     "COMMERCIAL UNITS",
@@ -182,7 +182,6 @@
     "NEIGHBORHOOD_PARK SLOPE",
     "NEIGHBORHOOD_PARK SLOPE SOUTH",
     "NEIGHBORHOOD_PARKCHESTER",
-    "NEIGHBORHOOD_PELHAM BAY",
     "NEIGHBORHOOD_PELHAM GARDENS",
     "NEIGHBORHOOD_PELHAM PARKWAY NORTH",
     "NEIGHBORHOOD_PELHAM PARKWAY SOUTH",
@@ -404,13 +403,23 @@
     "BUILDING CLASS AT PRESENT_W4",
     "BUILDING CLASS AT PRESENT_W8",
     "BUILDING CLASS AT PRESENT_W9",
-    "BUILDING CLASS AT PRESENT_Y1",
     "BUILDING CLASS AT PRESENT_Y3",
     "BUILDING CLASS AT PRESENT_Z0",
     "BUILDING CLASS AT PRESENT_Z9"
   ],
+  "numeric_columns": [
+    "TOTAL UNITS",
+    "RESIDENTIAL UNITS",
+    "COMMERCIAL UNITS",
+    "GROSS SQUARE FEET",
+    "LAND SQUARE FEET",
+    "YEAR BUILT"
+  ],
   "robust": false,
   "drop_top_pct": 0.0,
-  "m": 29275,
-  "n": 408
+  "min_price": 10000,
+  "rows_dropped_below_min_price": 895,
+  "m": 28380,
+  "n_full": 406,
+  "n_numeric": 6
 }
