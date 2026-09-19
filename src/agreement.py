@@ -1,7 +1,7 @@
 """Acordul dintre metode: Jaccard pe perechi, cate proprietati sunt marcate de toate / de una singura.
 
     python src/agreement.py [--tag ""]
-Citeste results/anomalies_*.csv, scrie results/agreement.csv
+Citeste results/anomalies_*<tag>.csv, scrie results/agreement<tag>.csv
 """
 import argparse, os, csv, glob, itertools, numpy as np
 
@@ -15,7 +15,10 @@ def main():
     sets = {}
     for p in sorted(glob.glob(os.path.join(ROOT, "results", f"anomalies_*{a.tag}.csv"))):
         name = os.path.basename(p)[len("anomalies_"):-len(".csv")]
-        if a.tag and name.endswith(a.tag): name = name[:-len(a.tag)]
+        if a.tag:
+            name = name[:-len(a.tag)]
+        elif "_" in name:
+            continue                      # fara --tag luam doar fisierele fara sufix
         sets[name] = flagged(p)
     if len(sets) < 2: print("am nevoie de cel putin 2 fisiere anomalies_*.csv"); return
     rows = []
@@ -25,7 +28,7 @@ def main():
         print(f"{x:<8} vs {y:<8} |x|={len(sets[x])} |y|={len(sets[y])} comune={len(sets[x]&sets[y])} Jaccard={j:.3f}")
     allc = set.intersection(*sets.values()); onlys = {k: len(v - set.union(*(s for kk, s in sets.items() if kk != k))) for k, v in sets.items()}
     print(f"marcate de toate {len(sets)} metodele: {len(allc)}"); print("doar de una:", onlys)
-    with open(os.path.join(ROOT, "results", "agreement.csv"), "w", newline="") as f:
+    with open(os.path.join(ROOT, "results", f"agreement{a.tag}.csv"), "w", newline="") as f:
         w = csv.writer(f); w.writerow(["pair","n_a","n_b","common","jaccard"]); w.writerows(rows)
         w.writerow(["all_methods", "", "", len(allc), ""])
         for k, v in onlys.items(): w.writerow([f"only_{k}", "", "", v, ""])
